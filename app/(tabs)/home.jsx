@@ -19,6 +19,7 @@ import useAppwrite from "../../lib/useAppwrite";
 import VideoCard from "../../components/VideoCard";
 
 const Home = () => {
+  const { user } = useGlobalContext();
   const { data: posts, refetch } = useAppwrite(getAllPosts);
   const { data: latestPosts } = useAppwrite(getLatestPosts);
 
@@ -29,6 +30,8 @@ const Home = () => {
     await refetch();
     setRefreshing(false);
   };
+
+  console.log(user);
 
   return (
     <SafeAreaView className="bg-primary h-full">
@@ -47,7 +50,7 @@ const Home = () => {
                     Welcome back
                   </Text>
                   <Text className="text-2xl font-psemibold text-white">
-                    Pavan Kumar
+                    {user?.username}
                   </Text>
                 </View>
                 <View className="mt-1.5">
